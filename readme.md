@@ -356,117 +356,36 @@ SS OUTPUT DI NO 9
 >Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
 www.parikesit.abimanyu.yyy.com/js
 
-1. set alias /js ke /public/js
-```
-alias "/js" "/var/www/parikesit.abimanyu.it24/public/js"
-```
-2. restart apache2
-```
-service apache2 restart
-```
-3.Output:
+1.Command :
+![WhatsApp Image 2023-10-17 at 17 17 54_e004a369](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/27ce776b-35a2-41c7-8865-3cab50dd74d5)
+
+2.Output:
 ![WhatsApp Image 2023-10-17 at 17 17 06_f03cd7b0](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/6205aa3b-d1af-4a20-bb4e-7f296cba5178)
 
 ## Soal 17 & 18
 >Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
 >Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
 
-1.Buat konfigurasi web server pada file /etc/apache2/sites-available/rjp.baratayuda.abimanyu.it24.com.conf
-```
-<VirtualHost *:14000 *:14400>
-    ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/rjp.baratayuda.abimanyu.it24
-    ServerName rjp.baratayuda.abimanyu.it24.com
-    ServerAlias www.rjp.baratayuda.abimanyu.it24.com
+1.Command :
+![WhatsApp Image 2023-10-17 at 17 19 47_6ddf2e23](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/3e7f15c3-3014-4e70-8bd6-1cab2fce0c09)
 
-    <Directory /var/www/rjp.baratayuda.abimanyu.it24>
-        Options +FollowSymLinks -Multiviews
-        AllowOverride All
-	AuthType Basic
-        AuthName "Restricted Content"
-        AuthUserFile /var/www/rjp.baratayuda.abimanyu.it24/.htpasswd
-        Require valid-user
-    </Directory>
-
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-
-</VirtualHost>
-```
-2.Enable konfigurasi rjp.baratayuda.abimanyu.it24.com.conf dengan command berikut:
-```
-a2ensite rjp.baratayuda.abimanyu.it24.com
-```
-3.Deployment resource and generate credentials
-```
-mkdir -p /var/www/rjp.baratayuda.abimanyu.it24
-
-wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1pPSP7yIR05JhSFG67RVzgkb-VcW9vQO6' -O /tmp/rjp.baratayuda_dist.zip
-
-unzip -o /tmp/rjp.baratayuda_dist.zip -d /tmp
-
-mv /tmp/rjp.baratayuda.abimanyu.yyy.com/* /var/www/rjp.baratayuda.abimanyu.it24/ -f
-
-htpasswd -b -c /var/www/rjp.baratayuda.abimanyu.it24/.htpasswd Wayang baratayudait24
-```
-4.Edit file /etc/apache2/ports.conf menjadi seperti berikut:
-```
-
-Listen 80
-Listen 14000
-Listen 14400
-
-<IfModule ssl_module>
-        Listen 443
-</IfModule>
-
-<IfModule mod_gnutls.c>
-        Listen 443
-</IfModule>
-
-# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
-```
-5.Restart apache2 service
-```
-service apache2 restart
-```
-6.Output :
+2.Output :
 ![WhatsApp Image 2023-10-17 at 17 22 16_b7b66f7b](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/41152b6b-6901-4936-8345-0e44e7285f8f)
 
 ## Soal 19
 >Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
 
-1.Buat konfigurasi pada file /etc/apache2/sites-available/abimanyu.ip.conf seperti berikut:
-```
-<VirtualHost *:80>
-    ServerName 10.78.2.4
-    Redirect permanent / http://abimanyu.it24.com
-</VirtualHost>
-```
+1.Command :
+![WhatsApp Image 2023-10-17 at 17 22 53_1b69a233](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/9003a652-ba21-49e8-8bbe-5172784396c3)
 
-2.Enable konfigurasi dengan command berikut:
-```
-a2ensite abimanyu.ip
-```
-3.Restart service apache2
-```
-service apache2 restart
-```
-4.Ouput :
+2.Ouput :
 ![WhatsApp Image 2023-10-17 at 17 23 07_ebed1cd2](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/638c90a6-1a32-4c6f-9b4e-137865af74ff)
 
 ## Soal 20
 >Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png.
 
-1.Edit file /var/www/parikesit.abimanyu.it24/.htaccess sehingga menjadi seperti berikut:
-```
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !^/public/images/abimanyu.png$
-RewriteRule ^(.*)\.(jpg|jpeg|png|gif)$ /public/images/abimanyu.png [NC,L]
+1.Command :
+![WhatsApp Image 2023-10-17 at 18 18 07_f3ca0e0d](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/8316b2ea-4b80-408f-b390-6aa50b730823)
 
-ErrorDocument 404 /error/404.html
-ErrorDocument 403 /error/403.html
-```
 2.Output :
 ![WhatsApp Image 2023-10-17 at 18 18 17_f960cd79](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/ec84f75e-8628-42f4-8b63-933c9c43324f)
