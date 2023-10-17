@@ -371,6 +371,8 @@ www.parikesit.abimanyu.yyy.com/js
 
 2.Output :
 ![WhatsApp Image 2023-10-17 at 17 22 16_b7b66f7b](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/41152b6b-6901-4936-8345-0e44e7285f8f)
+![WhatsApp Image 2023-10-17 at 17 21 40_23e1da45](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/add4f7df-5173-441c-8af8-5ba977fe7aca)
+
 
 ## Soal 19
 >Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
