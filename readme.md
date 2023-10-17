@@ -607,20 +607,48 @@ lynx www.parikesit.abimanyu.it24.com/secret
 >Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
 www.parikesit.abimanyu.yyy.com/js
 
-1.Command :
+1.pada /etc/apache2/sites-available/parikesit.abimanyu.it24.com.conf tambahakan line :
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/1c3e07b2-e7af-4fc6-a05a-242cf2f534da)
+
+2.Restart apache2 service
+
+```
+service apache2 restart
+
+```
+
+2.Command :
 ![WhatsApp Image 2023-10-17 at 17 17 54_e004a369](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/27ce776b-35a2-41c7-8865-3cab50dd74d5)
 
-2.Output:
+3.Output:
 ![WhatsApp Image 2023-10-17 at 17 17 06_f03cd7b0](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/6205aa3b-d1af-4a20-bb4e-7f296cba5178)
 
 ## Soal 17 & 18
 >Agar aman, buatlah konfigurasi agar www.rjp.baratayuda.abimanyu.yyy.com hanya dapat diakses melalui port 14000 dan 14400.
 >Untuk mengaksesnya buatlah autentikasi username berupa “Wayang” dan password “baratayudayyy” dengan yyy merupakan kode kelompok. Letakkan DocumentRoot pada /var/www/rjp.baratayuda.abimanyu.yyy.
 
-1.Command :
+1. config pada /etc/apache2/sites-available/rjp.baratayuda.abimanyu.it24.com.conf
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/571c5c27-2169-4dca-8164-e1856ab74ad0)
+
+2.Enable konfigurasi rjp.baratayuda.abimanyu.it24.com.conf dengan command berikut:
+```
+a2ensite rjp.baratayuda.abimanyu.it24.com
+```
+3.Deploy dan generate credentials
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/1e164150-8600-40f1-ac84-53c5407f52d3)
+
+4.Edit file /etc/apache2/ports.conf
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/f633b42a-f9ff-4dce-8535-9aa5513d9fa1)
+
+5.Restart apache2 service
+```
+service apache2 restart
+```
+
+5.Command :
 ![WhatsApp Image 2023-10-17 at 17 19 47_6ddf2e23](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/3e7f15c3-3014-4e70-8bd6-1cab2fce0c09)
 
-2.Output :
+6.Output :
 ![WhatsApp Image 2023-10-17 at 17 22 16_b7b66f7b](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/41152b6b-6901-4936-8345-0e44e7285f8f)
 ![WhatsApp Image 2023-10-17 at 17 21 40_23e1da45](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/add4f7df-5173-441c-8af8-5ba977fe7aca)
 
@@ -628,17 +656,33 @@ www.parikesit.abimanyu.yyy.com/js
 ## Soal 19
 >Buatlah agar setiap kali mengakses IP dari Abimanyu akan secara otomatis dialihkan ke www.abimanyu.yyy.com (alias)
 
-1.Command :
+1.Config pada /etc/apache2/sites-available/abimanyu.ip.conf :
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/1727718a-b654-45b8-a908-96374250d125)
+
+2.Enable konfigurasi dengan command berikut:
+```
+a2ensite abimanyu.ip
+```
+
+3.Restart service apache2
+```
+service apache2 restart
+```
+
+3.Command :
 ![WhatsApp Image 2023-10-17 at 17 22 53_1b69a233](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/9003a652-ba21-49e8-8bbe-5172784396c3)
 
-2.Ouput :
+4.Ouput :
 ![WhatsApp Image 2023-10-17 at 17 23 07_ebed1cd2](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/638c90a6-1a32-4c6f-9b4e-137865af74ff)
 
 ## Soal 20
 >Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png.
 
-1.Command :
+1.Edit file /var/www/parikesit.abimanyu.it24/.htaccess
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/c24f47e1-b54b-4c1b-89f3-14e342dd1af9)
+
+2.Command :
 ![WhatsApp Image 2023-10-17 at 18 18 07_f3ca0e0d](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/8316b2ea-4b80-408f-b390-6aa50b730823)
 
-2.Output :
+3.Output :
 ![WhatsApp Image 2023-10-17 at 18 18 17_f960cd79](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/ec84f75e-8628-42f4-8b63-933c9c43324f)
