@@ -393,7 +393,7 @@ service apache2 restart
 
 </VirtualHost>
 ```
-2.Enable konfigurasi rjp.baratayuda.abimanyu.it29.com.conf dengan command berikut:
+2.Enable konfigurasi rjp.baratayuda.abimanyu.it24.com.conf dengan command berikut:
 ```
 a2ensite rjp.baratayuda.abimanyu.it24.com
 ```
