@@ -4,7 +4,7 @@
 ## Anggota Kelompok
 
 - Wisnuyasha Faizal / 5027211036
-- I Gusti / 50272110
+- I Gusti Agung Bagus Maitreya Satyamurti / 5027211046
 
 ## Soal 1
 > Yudhistira akan digunakan sebagai DNS Master, Werkudara sebagai DNS Slave, Arjuna merupakan Load Balancer yang terdiri dari beberapa Web Server yaitu Prabakusuma, Abimanyu, dan Wisanggeni. Buatlah topologi dengan pembagian sebagai berikut. Folder topologi dapat diakses pada drive berikut 
