@@ -343,14 +343,171 @@ SS OUTPUT DI NO 9
 ## Revisi
 
 ## Soal 11
+> Selain menggunakan Nginx, lakukan konfigurasi Apache Web Server pada worker Abimanyu dengan web server www.abimanyu.yyy.com. Pertama dibutuhkan web server dengan DocumentRoot pada /var/www/abimanyu.yyy
+
+1. Install dependencies setup webserver
+```
+apt-get install apache2 libapache2-mod-php7.2 -y
+```
+
+2. Lakukan enable konfigurasi abimanyu.it24.com.conf 
+```
+a2ensite abimanyu.it24.com
+```
+3. Edit file konfigurasi pada file `/etc/apache2/sites-available/abimanyu.it24.com.conf`
+```
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/abimanyu.it24
+    ServerName abimanyu.it24.com
+    ServerAlias www.abimanyu.it24.com
+    
+    <Directory /var/www/abimanyu.it24>
+        Options +FollowSymLinks -Multiviews
+        AllowOverride All
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+```
+
+4. Download resource yang telah diberikan dan diletakkan ke file `/var/www/abimanyu.it24`
+```
+wget 'https://docs.google.com/uc?export=download&id=1a4V23hwK9S7hQEDEcv9FL14UkkrHc-Zc' -O /tmp/abimanyu.zip
+
+unzip -o /tmp/abimanyu.zip -d /tmp
+
+# enable konfigurasi
+a2ensite abimanyu.it24.com
+
+mv /tmp/abimanyu.yyy.com/* /var/www/abimanyu.it24/ -f
+```
+
+5. Lakukan disable konfig apache2 dan start service apache
+
+```
+a2dissite 000-default.conf
+service apache2 start
+```
+#### Testing :
+```
+lynx abimanyu.it24.com
+```
+#### SS OUTPUT :
+![ssno11](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100693456/ec6c0330-d4ee-49ef-9bbe-5f44115fb54c)
 
 ## Soal 12
+> Setelah itu ubahlah agar url www.abimanyu.yyy.com/index.php/home menjadi www.abimanyu.yyy.com/home.
+1. Lakukan aktivasi rewrite
+```
+a2enmod rewrite
+```
+
+2. Buatlah file `var/www/abimanyu.it24/.htaccess`
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^home$ /index.php/home [NC,L]
+```
+
+3. Restart apache2
+```
+service apache2 restart
+```
+#### Testing :
+```
+lynx www.abimanyu.it24.com/home
+```
+#### SS OUTPUT :
+![ssno12](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100693456/2c6fac9d-c7a6-4a01-850c-d51cded82899)
 
 ## Soal 13
+> Selain itu, pada subdomain www.parikesit.abimanyu.yyy.com, DocumentRoot disimpan pada /var/www/parikesit.abimanyu.yyy
+
+1. Lakukan enable konfigurasi `abimanyu.it24.com.conf`
+```
+a2ensite parikesit.abimanyu.it24.com
+```
+
+2. Edit konfigurasi pada `/etc/apache2/sites-available/parikesit.abimanyu.it24.com.conf` 
+```
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/parikesit.abimanyu.it24
+    ServerName parikesit.abimanyu.it24.com
+    ServerAlias www.parikesit.abimanyu.it24.com
+
+    <Directory /var/www/parikesit.abimanyu.it24>
+        Options +FollowSymLinks -Multiviews
+        AllowOverride All
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+```
+
+3. Download resource yang telah diberikan dan diletakkan ke file `/var/www/parikesit.abimanyu.it24/`
+```
+mkdir -p /var/www/parikesit.abimanyu.it24
+
+wget 'https://docs.google.com/uc?export=download&id=1LdbYntiYVF_NVNgJis1GLCLPEGyIOreS' -O /tmp/parikesit.zip
+
+unzip -o /tmp/parikesit.zip -d /tmp
+
+mv /tmp/parikesit.abimanyu.yyy.com/* /var/www/parikesit.abimanyu.it24/ -f
+```
+
+#### Testing :
+```
+lynx www.parikesit.abimanyu.it24.com
+```
+#### SS Output :
+![ssno13](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100693456/caa953c2-00fb-4d12-91ef-05b22466a1fe)
 
 ## Soal 14
+> Pada subdomain tersebut folder /public hanya dapat melakukan directory listing sedangkan pada folder /secret tidak dapat diakses (403 Forbidden).
+1. Buat directory secret 
+```
+mkdir /var/www/parikesit.abimanyu.it24/secret
+```
+
+2. Input file ke secret.txt
+```
+echo "secret" > /var/www/parikesit.abimanyu.it24/secret/secret.txt
+```
+
+3. Untuk disable directory listing secret, lakukan edit pada `/var/www/parikesit.abimanyu.it24/secret/.htaccess`
+```
+Options -Indexes
+```
+
+#### Testing
+```
+lynx www.parikesit.abimanyu.it24.com/secret
+```
+#### SS Output
+![ssno14](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100693456/21dd193f-6178-4264-9f7c-fb583d218b03)
+![ssnooo14](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100693456/7ba1ebb7-fa7b-4440-b24b-73acc04de80f)
 
 ## Soal 15
+> Buatlah kustomisasi halaman error pada folder /error untuk mengganti error kode pada Apache. Error kode yang perlu diganti adalah 404 Not Found dan 403 Forbidden.
+
+1. Edit file `/var/www/parikesit.abimanyu.it24/.htaccess` sehingga error menjadi 404 not found dan 403 forbidden
+```
+ErrorDocument 404 /error/404.html
+ErrorDocument 403 /error/403.html
+```
+#### Testing
+```
+lynx www.parikesit.abimanyu.it24.com/secret
+
+```
+#### SS Output
+![ssno15](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100693456/a030252f-2df5-48b2-aa17-48375aab192b)
 
 ## Soal 16
 >Buatlah suatu konfigurasi virtual host agar file asset www.parikesit.abimanyu.yyy.com/public/js menjadi 
