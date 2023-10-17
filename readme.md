@@ -458,7 +458,7 @@ service apache2 restart
 ## Soal 20
 >Karena website www.parikesit.abimanyu.yyy.com semakin banyak pengunjung dan banyak gambar gambar random, maka ubahlah request gambar yang memiliki substring “abimanyu” akan diarahkan menuju abimanyu.png.
 
-1.Edit file /var/www/parikesit.abimanyu.it29/.htaccess sehingga menjadi seperti berikut:
+1.Edit file /var/www/parikesit.abimanyu.it24/.htaccess sehingga menjadi seperti berikut:
 ```
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
