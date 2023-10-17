@@ -192,10 +192,9 @@ zone "parikesit.abimanyu.it24.com" {
 };
 ```
 2. record DNS pada /etc/bind/it24/baratayuda/parikesit.abimanyu.it24.com.
-```
+
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/6a954b81-e69b-4c9f-9f66-c37a698cc33c)
 
-```
 
 3.Restart apache
 ```
@@ -206,14 +205,13 @@ service bind9 restart
 
 >Buat juga reverse domain untuk domain utama. (Abimanyu saja yang direverse)
 1.Pada file /etc/bind/named.local.conf tambahkan line berikut:
-```
+
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/82064b72-dab3-495e-8dea-828d64b6cb5e)
-```
 
 2.Buat DNS recordnya pada file /etc/bind/abimanyu.024/3.245.192.in-addr.arpa.
-```
+
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/570a80b8-fa33-439e-971d-7959a7134597)
-```
+
 3.Restart bind9 service
 ```
 service bind9 restart
@@ -223,31 +221,26 @@ service bind9 restart
 >Agar dapat tetap dihubungi ketika DNS Server Yudhistira bermasalah, buat juga Werkudara sebagai DNS Slave untuk domain utama.
 
 1.Edit konfigurasi zone arjuna.024.com & abimanyu.024.com pada file /etc/bind/named.local.conf sehingga menjadi seperti berikut.
-```
+
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/ddcad193-ae14-4f3e-ac8b-09cb56044cd0)
-```
+
 
 2. Di Werkudara
-```
-![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/2b372013-4334-4923-96d9-f84108e69765)
 
-```
+![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/2b372013-4334-4923-96d9-f84108e69765)
 
 3.Restart bind9 service
 ```
 service bind9 restart
 ```
 
-
 ## Soal 7
 >Seperti yang kita tahu karena banyak sekali informasi yang harus diterima, buatlah subdomain khusus untuk perang yaitu baratayuda.abimanyu.yyy.com dengan alias www.baratayuda.abimanyu.yyy.com yang didelegasikan dari Yudhistira ke Werkudara dengan IP menuju ke Abimanyu dalam folder Baratayuda.
 
 1.Edit file /etc/bind/abimanyu.024/abimanyu.024.com seperti berikut:
 
-```
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/a63b8e18-835e-4995-8209-67db89fca757)
 
-```
 2.Edit juga file /etc/bind/named.conf.options.
 ```
 options {
@@ -269,14 +262,14 @@ service bind9 restart
 Untuk informasi yang lebih spesifik mengenai Ranjapan Baratayuda, buatlah subdomain melalui Werkudara dengan akses rjp.baratayuda.abimanyu.yyy.com dengan alias www.rjp.baratayuda.abimanyu.yyy.com yang mengarah ke Abimanyu.
 
 1.Pada file /etc/bind/named.local.conf tambahkan line seperti berikut:
-```
+
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/1eada20c-1369-4bfc-ba66-a8ec27a9fdeb)
-```
+
 
 2.Buat DNS record pada file /etc/bind/it29/baratayuda/baratayuda.abimanyu.024.com.
-```
+
 ![image](https://github.com/wisnuyasha/Jarkom-Modul-2-IT24-2023/assets/100349628/5006f396-7f69-4cae-a234-1f55939e2611)
-```
+
 
 3.Restart bind9 service
 ```
